@@ -1,0 +1,200 @@
+paths:
+  /usuario:
+    get:
+      summary: Obtener un listado de usuarios con paginación
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Número de página (por defecto 1)
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          description: Cantidad de usuarios por página (por defecto 10)
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Listado de usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                  limit:
+                    type: integer
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Usuario"
+    post:
+      summary: Crear un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clave:
+                  type: string
+                  description: Clave de acceso para el usuario
+                usuario:
+                  $ref: "#/components/schemas/Usuario"
+      responses:
+        "201":
+          description: Usuario creado exitosamente
+        "400":
+          description: Error en la validación de datos
+  /usuario/{id}:
+    get:
+      summary: Obtener un usuario por su ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del usuario
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Datos del usuario
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        "404":
+          description: Usuario no encontrado
+    put:
+      summary: Actualizar un usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del usuario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+      responses:
+        "200":
+          description: Usuario actualizado exitosamente
+        "400":
+          description: Error en la validación de datos
+        "404":
+          description: Usuario no encontrado
+  /usuario/resetear-clave:
+    post:
+      summary: Resetear la clave de un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetearClave"
+      responses:
+        "200":
+          description: Clave reseteada exitosamente
+        "400":
+          description: Error en la validación de datos
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único del usuario
+        nombre:
+          type: string
+        apellido:
+          type: string
+        telefonoFijo:
+          type: string
+        telefonoMovil:
+          type: string
+        telefonoInstitucional:
+          type: string
+        rol:
+          type: object
+          properties:
+            id:
+              type: string
+            nombre:
+              type: string
+        esResponsable:
+          type: boolean
+        esPropenente:
+          type: boolean
+        esAutorizante:
+          type: boolean
+        esContraseñaTemporal:
+          type: boolean
+        unidad:
+          type: object
+          properties:
+            id:
+              type: string
+            nombre:
+              type: string
+    UsuarioCreacion:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID único del usuario
+        nombre:
+          type: string
+        apellido:
+          type: string
+        telefonoFijo:
+          type: string
+        telefonoMovil:
+          type: string
+        telefonoInstitucional:
+          type: string
+        rol:
+          type: object
+          properties:
+            id:
+              type: string
+            nombre:
+              type: string
+        esResponsable:
+          type: boolean
+        esPropenente:
+          type: boolean
+        esAutorizante:
+          type: boolean
+        esContraseñaTemporal:
+          type: boolean
+        constraseña:
+          type: string
+        unidad:
+          type: object
+          properties:
+            id:
+              type: string
+            nombre:
+              type: string
+    ResetearClave:
+      type: object
+      properties:
+        idUsuario:
+          type: string
+          description: ID del usuario cuya clave se va a resetear
+        clave:
+          type: string
+          description: Nueva clave para el usuario

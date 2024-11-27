@@ -1,0 +1,15 @@
+{
+  "name": "swagger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "swagger-cli bundle -r -o dist/swagger.yaml gex-swagger.yaml --type yaml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "swagger-cli": "^4.0.4"
+  }
+}
