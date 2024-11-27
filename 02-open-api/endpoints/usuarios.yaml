@@ -10,7 +10,7 @@ paths:
           schema:
             type: integer
             default: 1
-        - name: limit
+        - name: pageSize
           in: query
           required: false
           description: Cantidad de usuarios por página (por defecto 10)
@@ -25,12 +25,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  page:
-                    type: integer
-                  limit:
-                    type: integer
-                  total:
-                    type: integer
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                        description: Página actual
+                      pageSize:
+                        type: integer
+                        description: Tamaño de la página
+                      totalItems:
+                        type: integer
+                        description: Total de elementos
                   data:
                     type: array
                     items:
