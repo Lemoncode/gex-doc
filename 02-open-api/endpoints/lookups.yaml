@@ -1,0 +1,71 @@
+paths:
+  /lookups/roles:
+    get:
+      tags:
+        - Lookups
+      summary: Obtener listado de roles
+      responses:
+        "200":
+          description: Lista de roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lookup"
+        "400":
+          description: Error en la solicitud
+  /lookups/unidades:
+    get:
+      tags:
+        - Lookups
+      summary: Obtener listado de unidades
+      responses:
+        "200":
+          description: Lista de unidades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lookup"
+        "400":
+          description: Error en la solicitud
+  /lookups/unidades-roles:
+    get:
+      tags:
+        - Lookups
+      summary: Obtener listas de unidades y roles
+      responses:
+        "200":
+          description: Listado combinado de unidades y roles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnidadesRoles"
+        "400":
+          description: Error en la solicitud
+components:
+  schemas:
+    Lookup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID único del elemento
+        nombre:
+          type: string
+          description: Nombre del elemento
+    UnidadesRoles:
+      type: object
+      properties:
+        roles:
+          type: array
+          description: Lista de roles
+          items:
+            $ref: "#/components/schemas/Lookup"
+        unidades:
+          type: array
+          description: Lista de unidades
+          items:
+            $ref: "#/components/schemas/Lookup"

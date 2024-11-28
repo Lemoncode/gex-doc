@@ -1,13 +1,18 @@
 openapi: 3.0.0
 info:
-  title: API de Gestión de Usuarios - GEX
-  description: API para gestionar usuarios dentro del sistema GEX. Diseñada para facilitar futuras ampliaciones.
+  title: API GEX
+  description: API para datos dentro del sistema GEX. Diseñada para facilitar futuras ampliaciones.
   version: "1.0.0"
 servers:
   - url: https://api.gex.com
     description: Servidor de producción
   - url: https://api.staging.gex.com
     description: Servidor de pruebas
+tags:
+  - name: Usuarios
+    description: Operaciones relacionadas con los usuarios
+  - name: Lookups
+    description: Datos auxiliares (roles, unidades, etc.)
 paths:
   /usuario:
     $ref: "endpoints/usuarios.yaml#/paths/~1usuario"
@@ -15,3 +20,9 @@ paths:
     $ref: "endpoints/usuarios.yaml#/paths/~1usuario~1{id}"
   /usuario/resetear-clave:
     $ref: "endpoints/usuarios.yaml#/paths/~1usuario~1resetear-clave"
+  /lookups/roles:
+    $ref: "endpoints/lookups.yaml#/paths/~1lookups~1roles"
+  /lookups/unidades:
+    $ref: "endpoints/lookups.yaml#/paths/~1lookups~1unidades"
+  /lookups/unidades-roles:
+    $ref: "endpoints/lookups.yaml#/paths/~1lookups~1unidades-roles"
