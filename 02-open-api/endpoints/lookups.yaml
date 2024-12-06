@@ -56,6 +56,10 @@ components:
         nombre:
           type: string
           description: Nombre del elemento
+        codigo:
+          type: string
+          description: Código asociado al elemento (opcional)
+          nullable: true
     UnidadesRoles:
       type: object
       properties:
