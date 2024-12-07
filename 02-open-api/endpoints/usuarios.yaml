@@ -220,6 +220,7 @@ components:
           nullable: true
         rol:
           type: object
+          nullable: true
           properties:
             id:
               type: string
@@ -227,14 +228,19 @@ components:
               type: string
         esResponsable:
           type: boolean
+          nullable: true
         esProponente:
           type: boolean
+          nullable: true
         esAutorizante:
           type: boolean
+          nullable: true
         esContraseñaTemporal:
           type: boolean
+          nullable: true
         unidad:
           type: object
+          nullable: true
           properties:
             id:
               type: string
